@@ -1,5 +1,5 @@
 import os
-#commentaire 
+ 
 commande = ''
 
 #default values
@@ -148,7 +148,7 @@ def cmd_load(param, filename = 'save.csv'):
 
 def get_cmd():
     '''Traitement de la commande d'entrée'''
-    msg = input("Que faut-il faire ? ")
+    msg = input("Que faut-il faire ? (Ajout: 1, Individu: 2, Nouvelle nage: 3, Liste: 4, Nageur: 5, Nage: 6, Save: 7, Load: 8, Exit: 0)")
     msg = msg.lower()
     return msg
 
@@ -163,36 +163,54 @@ while isAlive:
 
     if commande == 'ajout':
         cmd_ajout(param)
+    elif commande == '1':
+        cmd_ajout(param)
         continue
     if commande == 'individu':
+        cmd_individu(param)
+    elif commande == '2':
         cmd_individu(param)
         continue
 
     if commande == 'nouvelle nage':
         cmd_nouvelle_nage(param)
+    elif commande == '3':
+        cmd_nouvelle_nage(param)
         continue
 
     if commande == 'liste':
+        cmd_liste(param)
+    elif commande == '4':
         cmd_liste(param)
         continue
 
     if commande == 'nageur':
         cmd_nageur(param)
+    elif commande == '5':
+        cmd_nageur(param)
         continue
 
     if commande == 'nage':
+        cmd_nage(param)
+    elif commande == '6':
         cmd_nage(param)
         continue
 
     if commande == 'save':
         cmd_save(param)
+    elif commande == '7':
+        cmd_save(param)
         continue
 
     if commande == 'load':
         cmd_load(param)
+    elif commande == '8':
+        cmd_load(param)
         continue
 
     if commande == 'exit':
+        isAlive = cmd_exit(param)
+    elif commande == '0':
         isAlive = cmd_exit(param)
         continue
 
