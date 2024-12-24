@@ -3,7 +3,7 @@ import os
 commande = ''
 
 #default values
-param = {'bdd': [(1,3,10),(2,1,13),(3,2,6), (3,1,8) ],
+param = {'bdd': [(1,3,10, "2024-06-08"),(2,1,13, "2024-06-09"),(3,2,6, "2024-06-10"), (3,1,8, "2024-06-11") ],
          'nages': [(1, "Brasse"), (2, "Dos"), (3, "Crawl")],
          'nageurs': [(1, "Pierre"), (2, "Paul"), (3, "Léa")]
         }
@@ -70,12 +70,12 @@ def cmd_nageur(param):
         print(f"{elt[0]:5} : {elt[1]}")
     tmp = int(input("Quel numéro de nageur ? "))
     print("Performances de ", tmp)
-    print("  nage   |  longueur")
-    print("--------------------")
+    print("  nage   |  longueur   |  date")
+    print("-------------------------------")
     for elt in param['bdd']:
         if elt[0]== tmp:
             nage = get_str_from_num_in_list(elt[1], param['nages'])
-            print(f" {nage:8}|  {elt[2]}")
+            print(f" {nage:8}|  {elt[2]}|  {elt[3]}")
 
 
 def cmd_nage(param):
