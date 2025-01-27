@@ -52,17 +52,18 @@ def cmd_ajout(param):
     b = int(input("Nage n° ? "))
     c = int(input("combien de longueur ? "))
     param['bdd'].append((a,b,c))
+    d = input("Date de la performance (yyyy-mm-dd) ? ")
+    param['bdd'].append((a, b, c, d))
 
 
 def cmd_liste(param):
     """Affiche toutes les performances des nageurs"""
-    print("Prénom      |  nage   |  longueur")
-    print("---------------------------------")
+    print("Prénom       |   Nage    |   Longueur   |   Date")
+    print("-----------------------------------------------")
     for elt in param['bdd']:
         nageur = get_str_from_num_in_list(elt[0], param['nageurs'])
         nage = get_str_from_num_in_list(elt[1], param['nages'])
-        print(f" {nageur:11}| {nage:8}|  {elt[2]}")
-
+    print(f" {nageur:12}| {nage:10}| {elt[2]:10} | {elt[3]}")
 
 def cmd_nageur(param):
     """Affiche toutes les performances d'un nageur"""
