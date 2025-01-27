@@ -51,7 +51,6 @@ def cmd_ajout(param):
         print(f"{elt[0]:5} : {elt[1]}")
     b = int(input("Nage n° ? "))
     c = int(input("combien de longueur ? "))
-    param['bdd'].append((a,b,c))
     d = input("Date de la performance (yyyy-mm-dd) ? ")
     param['bdd'].append((a, b, c, d))
 
@@ -63,7 +62,7 @@ def cmd_liste(param):
     for elt in param['bdd']:
         nageur = get_str_from_num_in_list(elt[0], param['nageurs'])
         nage = get_str_from_num_in_list(elt[1], param['nages'])
-    print(f" {nageur:12}| {nage:10}| {elt[2]:10} | {elt[3]}")
+        print(f" {nageur:12}| {nage:10}| {elt[2]:10} | {elt[3]}")
 
 def cmd_nageur(param):
     """Affiche toutes les performances d'un nageur"""
@@ -146,87 +145,54 @@ def cmd_load(param, filename = 'save.csv'):
         param[key].append(tuple(tmp))
     fichier.close()
 
+    '''Traitement de la commande d'entrée'''
 
 def get_cmd():
-    '''Traitement de la commande d'entrée'''
-    msg = input("Que faut-il faire ? (Ajout: 1, Individu: 2, Nouvelle nage: 3, Liste: 4, Nageur: 5, Nage: 6, Save: 7, Load: 8, Exit: 0)")
-    msg = msg.lower()
-    return msg
+    while True:
+        try:
+            msg = int(input("Que faut-il faire ? (Ajout: 1, Individu: 2, Nouvelle nage: 3, Liste: 4, Nageur: 5, Nage: 6, Save: 7, Load: 8, Exit: 0)"))
+            return msg
+        except:
+            print("Indiquez bien une valeur numérique")
 
 #
 #   Programme principal
 #
-def get_int_value():
-    while True:
-        try:
-            commande = int(input("Valeur ? "))
-            return commande
-        except:
-            print("Indiquez bien une valeur numérique")
-
-print('le nombre est ', get_int_value())
-
 isAlive = True
+
 if os.path.exists('save.backup'):
     cmd_load(param, 'save.backup')
+
 while isAlive:
-    try:
-        commande = int(input("Valeur ? "))
-        return commande
     
     commande = get_cmd()
-
-    if commande == 'ajout':
+    
+    if commande == 1:
         cmd_ajout(param)
-    elif commande == '1':
-        cmd_ajout(param)
-        continue
-    if commande == 'individu':
+
+    elif commande == 2:
         cmd_individu(param)
-    elif commande == '2':
-        cmd_individu(param)
-        continue
 
-    if commande == 'nouvelle nage':
+    elif commande == 3:
         cmd_nouvelle_nage(param)
-    elif commande == '3':
-        cmd_nouvelle_nage(param)
-        continue
 
-    if commande == 'liste':
+    elif commande == 4:
         cmd_liste(param)
-    elif commande == '4':
-        cmd_liste(param)
-        continue
 
-    if commande == 'nageur':
+    elif commande == 5:
         cmd_nageur(param)
-    elif commande == '5':
-        cmd_nageur(param)
-        continue
 
-    if commande == 'nage':
+    elif commande == 6:
         cmd_nage(param)
-    elif commande == '6':
-        cmd_nage(param)
-        continue
 
-    if commande == 'save':
+    elif commande == 7:
         cmd_save(param)
-    elif commande == '7':
-        cmd_save(param)
-        continue
 
-    if commande == 'load':
+    elif commande == 8:
         cmd_load(param)
-    elif commande == '8':
-        cmd_load(param)
-        continue
 
-    if commande == 'exit':
+    elif commande == 0:
         isAlive = cmd_exit(param)
-    elif commande == '0':
-        isAlive = cmd_exit(param)
-        continue
 
-    print(f"Commande {commande} inconnue")
+    else:
+        print(f"Commande {commande} inconnue")
