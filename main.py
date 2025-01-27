@@ -156,10 +156,24 @@ def get_cmd():
 #
 #   Programme principal
 #
+def get_int_value():
+    while True:
+        try:
+            commande = int(input("Valeur ? "))
+            return commande
+        except:
+            print("Indiquez bien une valeur numérique")
+
+print('le nombre est ', get_int_value())
+
 isAlive = True
 if os.path.exists('save.backup'):
     cmd_load(param, 'save.backup')
 while isAlive:
+    try:
+        commande = int(input("Valeur ? "))
+        return commande
+    
     commande = get_cmd()
 
     if commande == 'ajout':
