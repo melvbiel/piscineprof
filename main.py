@@ -66,16 +66,28 @@ def cmd_liste(param):
 
 def cmd_nageur(param):
     """Affiche toutes les performances d'un nageur"""
-    for elt in param['nageurs']:
-        print(f"{elt[0]:5} : {elt[1]}")
-    tmp = int(input("Quel numéro de nageur ? "))
-    print("Performances de ", tmp)
-    print("  nage   |  longueur   |  date")
-    print("-------------------------------")
-    for elt in param['bdd']:
-        if elt[0]== tmp:
-            nage = get_str_from_num_in_list(elt[1], param['nages'])
-            print(f" {nage:8}|  {elt[2]}|  {elt[3]}")
+    while True:
+        try:
+            for elt in param['nageurs']:
+                print(f"{elt[0]:5} : {elt[1]}")
+
+            tmp = int(input("Quel numéro de nageur ? "))
+
+            if tmp not in [elt[0] for elt in param['nageurs']]:
+                print("Erreur : Ce numéro de nageur n'existe pas. Veuillez réessayer.")
+                continue  
+
+            print(f"Performances de {get_str_from_num_in_list(tmp, param['nageurs'])}")
+            print("  nage   |  longueur   |  date")
+            print("-------------------------------")
+            for elt in param['bdd']:
+                if elt[0] == tmp:
+                    nage = get_str_from_num_in_list(elt[1], param['nages'])
+                    print(f" {nage:8}|  {elt[2]}|  {elt[3]}")
+            break 
+
+        except ValueError:
+            print("Erreur : Veuillez entrer un nombre valide.")
 
 
 def cmd_nage(param):
