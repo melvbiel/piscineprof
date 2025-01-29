@@ -83,8 +83,30 @@ def cmd_nageur(param):
             for elt in param['bdd']:
                 if elt[0] == tmp:
                     nage = get_str_from_num_in_list(elt[1], param['nages'])
-                    print(f" {nage:8}|  {elt[2]}|  {elt[3]}")
-            break 
+                    print(f" {nage:8}|  {elt[2]}|  {elt[3]}") 
+                    somme=0
+                    indice=0
+                    moyenne=0
+                    max_longueur=0
+                    min_longueur=100
+                    for elt in param['bdd']:
+                        if max_longueur<elt[2]:
+                            max_longueur=elt[2]
+                        
+                    for elt in param['bdd']:
+                        if min_longueur>elt[2]:
+                            min_longueur=elt[2]
+                        
+                    for elt in param['bdd']:
+                        somme += elt[2]
+                        indice += 1
+                        moyenne = somme/indice
+                
+                    print(f'maximum:', max_longueur)
+                    print(f'minimum:', min_longueur)
+                    print('la moyenne est:', moyenne)
+        
+            break
 
         except ValueError:
             print("Erreur : Veuillez entrer un nombre valide.")
